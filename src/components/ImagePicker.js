@@ -22,7 +22,7 @@ const ImagePickers = () => {
       aspect: [4, 3],
       quality: 0.5,
     });
-
+    console.log(result);
     // const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
     if (!result.canceled) {
       setImage(result.assets[0].uri);

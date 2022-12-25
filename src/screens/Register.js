@@ -1,6 +1,5 @@
 import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
-
-import { COLORS, FONTS, SHADOWS } from "../utils/fonts";
+import { FONTS, SHADOWS } from "../utils/fonts";
 import images from "../assets";
 import { Formik } from "formik";
 import Button from "../components/Button";
@@ -11,9 +10,12 @@ import ImagePickers from "../components/ImagePicker";
 import DatePickers from "../components/DatePickers";
 import moment from "moment/moment";
 import { useRegisterMutation } from "../store/api";
+import { Loader } from "../components";
+import useAlert from "../components/Alert";
 const Register = ({ route, navigation }) => {
   const { email } = route.params;
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
+  const { showAlert } = useAlert();
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -26,7 +28,7 @@ const Register = ({ route, navigation }) => {
   };
   const validationSchema = Yup.object().shape({
     phone: Yup.number("Must be number")
-      .max(11, "Max of 11 is required")
+      //   .max(11, "Max of 11 is required")
       .required("Phone is required"),
     firstName: Yup.string().required("Enter First Name"),
     lastName: Yup.string().required("Enter last Name"),
@@ -49,6 +51,8 @@ const Register = ({ route, navigation }) => {
     //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     // ),
   });
+  const img =
+    "https://res.cloudinary.com/invoicetor/image/upload/v1661617714/Twitter_Meta_vwouva.png";
   const submitForm = async (values, onSubmitProps) => {
     const {
       firstName,
@@ -58,7 +62,6 @@ const Register = ({ route, navigation }) => {
       password,
       confirmPassword,
       birthday,
-      image,
     } = values;
     const date = moment(birthday).format("YYYY-MM-DD");
 
@@ -71,12 +74,18 @@ const Register = ({ route, navigation }) => {
       date_of_birth: date,
       password,
       password_confirmation: confirmPassword,
-      avatar: image,
+      avatar: img,
     };
     console.log(newData);
     const { data, error } = await register(newData);
-    // navigation.navigate("Verify");
-    console.log(data, error);
+    //
+    console.log(error);
+    const err = error?.data?.message;
+    if (error) {
+      showAlert(err);
+    } else {
+      navigation.navigate("Login");
+    }
   };
   const [step, setSteps] = useState(0);
   let Title;
@@ -168,6 +177,7 @@ const Register = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden={false} />
+      {isLoading && <Loader />}
       <>
         <View
           style={{
@@ -213,8 +223,9 @@ const Register = ({ route, navigation }) => {
           onSubmit={submitForm}
           validateOnMount={false}
         >
-          {({ isValid, isSubmitting, handleSubmit }) => (
+          {({ isValid, isSubmitting, handleSubmit, errors }) => (
             <View style={styles.inputsContainer}>
+              {console.log(errors)}
               <View
                 style={{
                   height: 100,

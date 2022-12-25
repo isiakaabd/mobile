@@ -11,9 +11,13 @@ import images from "~/assets";
 import { FONTS, SHADOWS } from "~/utils/fonts";
 import { Button, Input } from "~/components";
 import { useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 const ForgotPassword = ({ navigation }) => {
-  const [name, setName] = useState("");
+  const validationSchema = Yup.object().shape({
+    userName: Yup.string().required("Enter First Name").required(),
+  });
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
@@ -26,13 +30,29 @@ const ForgotPassword = ({ navigation }) => {
           you a mail with instructions to reset your password
         </Text>
       </View>
-      <View style={styles.inputsContainer}>
-        <Input properties={{ placeholder: "Enter Your Username" }} />
+      <Formik
+        validationSchema={validationSchema}
+        initialValues={{ userName: "" }}
+        onSubmit={submitForm}
+        validateOnMount={false}
+      >
+        {({ handleSubmit }) => (
+          <View style={styles.inputsContainer}>
+            <Input
+              properties={{ placeholder: "Enter Your Username" }}
+              name="username"
+            />
 
-        <View style={styles.button}>
-          <Button text="Confirm Email" backgroundColor={"#D20C83"} />
-        </View>
-      </View>
+            <View style={styles.button}>
+              <Button
+                text="Confirm Email"
+                handlePress={handleSubmit}
+                backgroundColor={"#D20C83"}
+              />
+            </View>
+          </View>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };

@@ -7,7 +7,6 @@ const Input = ({ properties, style, name, ...rest }) => {
   const [eye, setEye] = useState(false);
   const { handleChange, handleBlur, touched, values, errors } =
     useFormikContext();
-  console.log(touched);
   return (
     <View>
       <View style={styles.container}>
