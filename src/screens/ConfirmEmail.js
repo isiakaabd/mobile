@@ -6,23 +6,31 @@ import images from "../assets";
 import Button from "../components/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useVerifyOTPMutation } from "../store/api";
+import { useForgotPasswordLinkConfirmMutation } from "../store/api";
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 import GlobalStyle from "../utils/GlobalStyle";
-const Verify = ({ route, navigation }) => {
-  const { email } = route.params.values;
-  const [verifyOTP, { isLoading }] = useVerifyOTPMutation();
+import { useDispatch } from "react-redux";
+import { getToken } from "../store/reducers/authReducer";
+const ConfirmEmail = ({ route, navigation }) => {
+  const { email } = route.params;
+  const [verifyOTP, { isLoading }] = useForgotPasswordLinkConfirmMutation();
   const { showAlert } = useAlert();
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     otp: Yup.string().min(5, "Enter 5 digit OTP").required("OTP is required"),
   });
+
   const submitForm = async (values, onSubmitProps) => {
-    const { error } = await verifyOTP({ email, otp: values.otp });
+    const { error, data } = await verifyOTP({ email, otp: values.otp });
+
     if (error) {
       showAlert(error?.data?.message);
-    } else {
-      navigation.navigate("Register", { email });
+    }
+    if (data) {
+      dispatch(getToken(data?.access_token));
+      showAlert(data?.message);
+      navigation.replace("ChangePassword", { email });
     }
     onSubmitProps.resetForm();
   };
@@ -30,14 +38,14 @@ const Verify = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.textContainer}>
         {isLoading && <Loader />}
-        <Text style={styles.textHeader}>Verify Email</Text>
+        <Text style={styles.textHeader}>Open mail</Text>
 
         <Text style={styles.text}>
-          We sent a verification code to your{" "}
+          A password reset code has been sent to{" "}
           <Text style={{ color: "#842D71", fontFamily: FONTS.MulishBold }}>
             {email}
           </Text>
-          . Please input the code here to verify your email.
+          . Copy and input it in the spaces below.
         </Text>
       </View>
       <View style={styles.inputContainer}>
@@ -57,7 +65,7 @@ const Verify = ({ route, navigation }) => {
             }}
           >
             <Image
-              source={images.phone}
+              source={images.image06}
               style={styles.img2}
               resizeMode="contain"
             />
@@ -82,7 +90,7 @@ const Verify = ({ route, navigation }) => {
 
                 <View style={styles.button}>
                   <Button
-                    text="Verify Phone"
+                    text="Continue"
                     handlePress={handleSubmit}
                     backgroundColor={"#D20C83"}
                   />
@@ -105,7 +113,7 @@ const Verify = ({ route, navigation }) => {
   );
 };
 
-export default Verify;
+export default ConfirmEmail;
 
 const styles = StyleSheet.create({
   container: {

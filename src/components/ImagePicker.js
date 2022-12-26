@@ -26,10 +26,11 @@ const ImagePickers = () => {
     // const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      setFieldValue(
-        "image",
-        `data:image/jpeg;base64,${result.assets[0].base64}`
-      );
+      setFieldValue("image", result.assets[0].uri);
+      // setFieldValue(
+      //   "image",
+      //   `data:image/jpeg;base64,${result.assets[0].base64}`
+      // );
       setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     }
   };

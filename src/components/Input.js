@@ -4,7 +4,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useState } from "react";
 import { useFormikContext } from "formik";
 const Input = ({ properties, style, name, ...rest }) => {
-  const [eye, setEye] = useState(false);
+  const [eye, setEye] = useState(true);
   const { handleChange, handleBlur, touched, values, errors } =
     useFormikContext();
   return (
@@ -17,7 +17,9 @@ const Input = ({ properties, style, name, ...rest }) => {
           onBlur={handleBlur(name)}
           // {...field}
           value={values[name]}
-          secureTextEntry={eye}
+          secureTextEntry={
+            name === "password" || name === "confirmPassword" ? eye : false
+          }
           nativeID={name}
           // onChangeText={field.onChange}
           cursorColor="#822E6F"
@@ -26,7 +28,7 @@ const Input = ({ properties, style, name, ...rest }) => {
         />
         {properties?.keyboardType === "password" && (
           <FontAwesome5
-            name={eye ? "eye" : "eye-slash"}
+            name={!eye ? "eye" : "eye-slash"}
             size={15}
             onPress={() => setEye(!eye)}
           />

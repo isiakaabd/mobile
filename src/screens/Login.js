@@ -17,135 +17,147 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { useState } from "react";
 import * as Yup from "yup";
+import { useLoginMutation } from "../store/api";
+import { Loader } from "../components";
+import useAlert from "../components/Alert";
+import { useDispatch } from "react-redux";
+import { getUserDetails } from "../store/reducers/authReducer";
 const Login = ({ navigation }) => {
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: "",
   };
+  const { showAlert } = useAlert();
+  const [login, { isLoading }] = useLoginMutation();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Must be a valid Email")
       .required("Email is required"),
 
-    password: Yup.string()
-      .required("Enter your password")
-      .min(8, "password too short")
-      .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
-      .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
-      .matches(/^(?=.*[0-9])/, "Must contain at least one number")
-      .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
-    // .matches()
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    // ),
+    password: Yup.string().required("Enter your password"),
   });
-  const submitForm = (values, onSubmitProps) => {
-    console.log(values);
-    navigation.navigate("Verify");
+  console.log(isLoading);
+  const submitForm = async (values, onSubmitProps) => {
+    const { email, password } = values;
+    const { data, error } = await login({
+      email_or_username: email,
+      password,
+    });
+    if (error) {
+      showAlert(error.data?.message);
+    }
+    if (data) {
+      showAlert("Login Successful");
+      dispatch(getUserDetails(data));
+      navigation.navigate("Home");
+    }
   };
   return (
-    <View style={styles.container}>
-      <StatusBar hidden={false} />
-      <>
-        <View
-          style={{
-            backgroundColor: "#3F0331",
-            height: "50%",
-            justifyContent: "center",
-            alignItems: "center",
-            borderBottomLeftRadius: 44,
-            borderBottomRightRadius: 44,
-          }}
-        >
+    <>
+      {isLoading && <Loader />}
+      <View style={styles.container}>
+        <StatusBar hidden={false} />
+        <>
           <View
             style={{
-              width: 100,
-              height: 100,
-              borderRadius: 100,
-              backgroundColor: "#FFE7F5",
-              alignItems: "center",
+              backgroundColor: "#3F0331",
+              height: "50%",
               justifyContent: "center",
+              alignItems: "center",
+              borderBottomLeftRadius: 44,
+              borderBottomRightRadius: 44,
             }}
           >
-            <Image
-              source={images.logo2}
-              style={styles.img2}
-              resizeMode="contain"
-            />
-          </View>
-          <Text
-            style={{
-              fontFamily: FONTS.MulishBold,
-              fontSize: 29,
-              color: "#fff",
-              marginTop: 50,
-            }}
-          >
-            Welcome
-          </Text>
-        </View>
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={initialValues}
-          onSubmit={submitForm}
-        >
-          {({ isValid, isSubmitting, handleSubmit }) => (
-            <View style={styles.inputsContainer}>
-              <View>
-                <Input
-                  properties={{
-                    type: "email",
-                    placeholder: "Email Address",
-                  }}
-                  name="email"
-                />
-              </View>
-              <View style={{ marginTop: 20 }}>
-                <Input
-                  properties={{
-                    keyboardType: "password",
-                    secureTextEntry: true,
-                    placeholder: "Password",
-                  }}
-                  name="password"
-                />
-
-                <Text
-                  style={[styles.forgotten_password, { marginBottom: 10 }]}
-                  onPress={() => navigation.navigate("ForgotPassword")}
-                >
-                  Forgot Password?
-                </Text>
-              </View>
-
-              <View style={styles.button}>
-                <Button
-                  text="Log in"
-                  backgroundColor={"#D20C83"}
-                  handlePress={handleSubmit}
-                  disabled={isSubmitting && !isValid}
-                />
-                <Text
-                  style={[
-                    styles.forgotten_password,
-                    { textAlign: "left", color: "#3F3F3F" },
-                  ]}
-                >
-                  DON'T HAVE AN ACCOUNT?{" "}
-                  <Text
-                    style={{ color: "#D20C83" }}
-                    onPress={() => navigation.navigate("SignUp")}
-                  >
-                    SIGN UP
-                  </Text>
-                </Text>
-              </View>
+            <View
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: 100,
+                backgroundColor: "#FFE7F5",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                source={images.logo2}
+                style={styles.img2}
+                resizeMode="contain"
+              />
             </View>
-          )}
-        </Formik>
-      </>
-    </View>
+            <Text
+              style={{
+                fontFamily: FONTS.MulishBold,
+                fontSize: 29,
+                color: "#fff",
+                marginTop: 50,
+              }}
+            >
+              Welcome
+            </Text>
+          </View>
+          <Formik
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            onSubmit={submitForm}
+          >
+            {({ isValid, isSubmitting, handleSubmit }) => (
+              <View style={styles.inputsContainer}>
+                <View>
+                  <Input
+                    properties={{
+                      type: "email",
+                      placeholder: "Email Address",
+                    }}
+                    name="email"
+                  />
+                </View>
+                <View style={{ marginTop: 20 }}>
+                  <Input
+                    properties={{
+                      keyboardType: "password",
+                      secureTextEntry: true,
+                      placeholder: "Password",
+                    }}
+                    name="password"
+                  />
+
+                  <Text
+                    style={[styles.forgotten_password, { marginBottom: 10 }]}
+                    onPress={() => navigation.navigate("ForgotPassword")}
+                  >
+                    Forgot Password?
+                  </Text>
+                </View>
+
+                <View style={styles.button}>
+                  <Button
+                    text="Log in"
+                    backgroundColor={"#D20C83"}
+                    handlePress={handleSubmit}
+                    disabled={isSubmitting && !isValid}
+                  />
+                  <Text
+                    style={[
+                      styles.forgotten_password,
+                      { textAlign: "left", color: "#3F3F3F" },
+                    ]}
+                  >
+                    DON'T HAVE AN ACCOUNT?{" "}
+                    <Text
+                      style={{ color: "#D20C83" }}
+                      onPress={() => navigation.navigate("SignUp")}
+                    >
+                      SIGN UP
+                    </Text>
+                  </Text>
+                </View>
+              </View>
+            )}
+          </Formik>
+        </>
+      </View>
+    </>
   );
 };
 const styles = StyleSheet.create({

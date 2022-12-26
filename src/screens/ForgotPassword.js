@@ -13,16 +13,38 @@ import { Button, Input } from "~/components";
 import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useForgotPasswordMutation } from "../store/api";
+import useAlert from "../components/Alert";
+import { Loader } from "../components";
 
 const ForgotPassword = ({ navigation }) => {
+  const [confirmMail, { isLoading }] = useForgotPasswordMutation();
+  const { showAlert } = useAlert();
   const validationSchema = Yup.object().shape({
-    userName: Yup.string().required("Enter First Name").required(),
+    email: Yup.string()
+      .email("Enter a valid Email")
+      .required("Enter First Name")
+      .required(),
   });
+  const submitForm = async (values, onSubmitProps) => {
+    const { email } = values;
+    const { data, error } = await confirmMail({ email });
+    console.log(data);
+    if (error || error?.originalStatus === 500) {
+      showAlert("Email not Valid");
+    }
+    if (data) {
+      showAlert(data?.message);
+      navigation.replace("ConfirmEmail", { email });
+    }
+    onSubmitProps.resetForm();
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
       <View style={styles.image1} />
       <View style={styles.image2} />
+      {isLoading && <Loader />}
       <View>
         <Text style={styles.text}>Forgot password</Text>
         <Text style={styles.text2}>
@@ -32,15 +54,15 @@ const ForgotPassword = ({ navigation }) => {
       </View>
       <Formik
         validationSchema={validationSchema}
-        initialValues={{ userName: "" }}
+        initialValues={{ email: "" }}
         onSubmit={submitForm}
         validateOnMount={false}
       >
         {({ handleSubmit }) => (
           <View style={styles.inputsContainer}>
             <Input
-              properties={{ placeholder: "Enter Your Username" }}
-              name="username"
+              properties={{ placeholder: "Enter Your Email Address" }}
+              name="email"
             />
 
             <View style={styles.button}>

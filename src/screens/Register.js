@@ -27,12 +27,16 @@ const Register = ({ route, navigation }) => {
     image: "",
   };
   const validationSchema = Yup.object().shape({
-    phone: Yup.number("Must be number")
-      //   .max(11, "Max of 11 is required")
-      .required("Phone is required"),
-    firstName: Yup.string().required("Enter First Name"),
-    lastName: Yup.string().required("Enter last Name"),
-    userName: Yup.string().required("Enter User Name"),
+    phone: Yup.number("Must be number").required("Phone is required"),
+    firstName: Yup.string()
+      .required("Enter First Name")
+      .required("First Name is required"),
+    lastName: Yup.string()
+      .required("Enter last Name")
+      .required("Last Name is required"),
+    userName: Yup.string()
+      .required("Enter User Name")
+      .required("UserName is required"),
     password: Yup.string()
       .required("Enter your password")
       .min(8, "password too short")
@@ -41,16 +45,12 @@ const Register = ({ route, navigation }) => {
       .matches(/^(?=.*[0-9])/, "Must contain at least one number")
       .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
 
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    ),
-    // .matches()
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    // ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Password is required"),
+    birthday: Yup.string().required("Date is required"),
   });
+
   const img =
     "https://res.cloudinary.com/invoicetor/image/upload/v1661617714/Twitter_Meta_vwouva.png";
   const submitForm = async (values, onSubmitProps) => {
@@ -62,6 +62,7 @@ const Register = ({ route, navigation }) => {
       password,
       confirmPassword,
       birthday,
+      image,
     } = values;
     const date = moment(birthday).format("YYYY-MM-DD");
 
@@ -74,7 +75,7 @@ const Register = ({ route, navigation }) => {
       date_of_birth: date,
       password,
       password_confirmation: confirmPassword,
-      avatar: img,
+      avatar: image,
     };
     console.log(newData);
     const { data, error } = await register(newData);
@@ -179,17 +180,7 @@ const Register = ({ route, navigation }) => {
       <StatusBar hidden={false} />
       {isLoading && <Loader />}
       <>
-        <View
-          style={{
-            backgroundColor: "#3F0331",
-            height: "55%",
-            paddingTop: 50,
-            justifyContent: "flex-start",
-            alignItems: "center",
-            borderBottomLeftRadius: 44,
-            borderBottomRightRadius: 44,
-          }}
-        >
+        <View style={styles.innerContainer}>
           <View
             style={{
               width: 100,
@@ -223,7 +214,7 @@ const Register = ({ route, navigation }) => {
           onSubmit={submitForm}
           validateOnMount={false}
         >
-          {({ isValid, isSubmitting, handleSubmit, errors }) => (
+          {({ handleSubmit, errors }) => (
             <View style={styles.inputsContainer}>
               {console.log(errors)}
               <View
@@ -236,7 +227,6 @@ const Register = ({ route, navigation }) => {
                   alignItems: "center",
                   borderRadius: 50,
                   top: -50,
-
                   backgroundColor: "#fff",
                   ...SHADOWS.light,
                 }}
@@ -257,7 +247,17 @@ const Register = ({ route, navigation }) => {
                   handlePress={
                     step !== 2 ? () => setSteps(step + 1) : handleSubmit
                   }
-                  disabled={isSubmitting && !isValid}
+                  disabled={
+                    step === 1
+                      ? errors.firstName || errors.lastName || errors.phone
+                      : step === 2
+                      ? errors.password ||
+                        errors.confirmPassword ||
+                        errors.userName
+                      : step === 3
+                      ? errors.birthday
+                      : false
+                  }
                 />
                 <Text
                   style={[
@@ -265,10 +265,10 @@ const Register = ({ route, navigation }) => {
                     { textAlign: "left", color: "#3F3F3F" },
                   ]}
                 >
-                  Already have an account?{" "}
+                  Already have an account?
                   <Text
                     style={{ color: "#D20C83" }}
-                    onPress={() => navigation.navigate("Home")}
+                    onPress={() => navigation.navigate("Login")}
                   >
                     Login
                   </Text>
@@ -285,6 +285,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFE7F5",
     height: "100%",
+  },
+  innerContainer: {
+    backgroundColor: "#3F0331",
+    height: "55%",
+    paddingTop: 50,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    borderBottomLeftRadius: 44,
+    borderBottomRightRadius: 44,
   },
   error: {
     color: "#FF0101",

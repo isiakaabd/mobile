@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const dataSlice = createSlice({
+export const authSlice = createSlice({
   name: "api",
   initialState: {
     response: null,
     isLoading: false,
+    token: undefined,
+    bearerToken: "",
+    user: {},
   },
 
   reducers: {
-    setGenerateOTPResponse(state, action) {
-      state.response = action.payload;
+    getToken(state, action) {
+      state.token = action.payload;
+    },
+    getUserDetails(state, action) {
+      state.bearerToken = action.payload.token;
+      state.user = action.payload.user;
     },
   },
 });
 
-const { reducer, actions } = dataSlice;
-export const { setGenerateOTPResponse } = actions;
+const { reducer, actions } = authSlice;
+export const { getToken, getUserDetails } = actions;
 export default reducer;
