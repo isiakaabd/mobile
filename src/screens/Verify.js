@@ -4,6 +4,7 @@ import { FONTS, SHADOWS } from "../utils/fonts";
 import Input from "../components/Input";
 import images from "../assets";
 import Button from "../components/Button";
+<<<<<<< HEAD
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useVerifyOTPMutation } from "../store/api/authSlice";
@@ -38,6 +39,19 @@ const Verify = ({ route, navigation }) => {
             {email}
           </Text>
           . Please input the code here to verify your email.
+=======
+const Verify = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <Text style={styles.textHeader}>Verify phone</Text>
+        <Text style={styles.text}>
+          We sent a verification code to your{" "}
+          <Text style={{ color: "#842D71", fontFamily: FONTS.MulishBold }}>
+            09031900410
+          </Text>
+          . Please input the code here to verify your phone number.
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
         </Text>
       </View>
       <View style={styles.inputContainer}>
@@ -62,6 +76,7 @@ const Verify = ({ route, navigation }) => {
               resizeMode="contain"
             />
           </View>
+<<<<<<< HEAD
           <Formik
             validationSchema={validationSchema}
             initialValues={{ otp: "" }}
@@ -99,6 +114,23 @@ const Verify = ({ route, navigation }) => {
               </>
             )}
           </Formik>
+=======
+          <View style={{ marginTop: 100 }}>
+            <Input type="numeric" />
+          </View>
+          <View style={styles.button}>
+            <Button text="Verify Phone" backgroundColor={"#D20C83"} />
+            <Text style={[styles.forgotten_password]}>
+              Already have an account?{" "}
+              <Text
+                style={{ color: "#D20C83" }}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Login
+              </Text>
+            </Text>
+          </View>
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
         </View>
       </View>
     </View>

@@ -4,6 +4,7 @@ module.exports = function (api) {
     presets: ["babel-preset-expo"],
     plugins: [
       [
+<<<<<<< HEAD
         "babel-plugin-root-import",
         {
           paths: [
@@ -16,6 +17,11 @@ module.exports = function (api) {
             //   rootPathPrefix: "~/",
             // },
           ],
+=======
+        "module-resolver",
+        {
+          root: ["./src"],
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
         },
       ],
     ],

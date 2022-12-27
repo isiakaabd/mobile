@@ -9,17 +9,26 @@ const Button = ({
   backgroundColor,
   handlePress,
   textColor,
+<<<<<<< HEAD
   disabled,
+=======
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
   ...rest
 }) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
+<<<<<<< HEAD
       {...rest}
       disabled={disabled}
       style={[styles.container, { backgroundColor }]}
     >
       <Text style={[styles.text]}>{text}</Text>
+=======
+      style={[styles.container, { backgroundColor }]}
+    >
+      <Text style={[styles.text, { ...rest }]}>{text}</Text>
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
     </TouchableOpacity>
   );
 };

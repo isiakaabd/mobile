@@ -4,6 +4,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+<<<<<<< HEAD
   ToastAndroid,
   View,
 } from "react-native";
@@ -44,6 +45,23 @@ const SignUp = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar hidden={false} />
       {isLoading && <Loader />}
+=======
+  View,
+} from "react-native";
+import { COLORS, FONTS, SHADOWS } from "../utils/fonts";
+import images from "../assets";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import Input from "../components/Input";
+import { useState } from "react";
+const SignUp = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [eye, setEye] = useState(false);
+  return (
+    <View style={styles.container}>
+      <StatusBar hidden={false} />
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
       <KeyboardAvoidingView>
         {/* <Text style={styles.text}>Log in</Text> */}
         <View
@@ -83,6 +101,7 @@ const SignUp = ({ navigation }) => {
             Create Account
           </Text>
         </View>
+<<<<<<< HEAD
         <Formik
           validationSchema={validationSchema}
           initialValues={{ email: "" }}
@@ -117,6 +136,29 @@ const SignUp = ({ navigation }) => {
             </View>
           )}
         </Formik>
+=======
+        <View style={styles.inputsContainer}>
+          <Input
+            placeholder="Phone Number"
+            value={email}
+            type="numeric"
+            onchange={setEmail}
+          />
+
+          <View style={styles.button}>
+            <Button text="Next" backgroundColor={"#D20C83"} />
+            <Text style={[styles.forgotten_password]}>
+              Already have an account?{" "}
+              <Text
+                style={{ color: "#D20C83" }}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Login
+              </Text>
+            </Text>
+          </View>
+        </View>
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
       </KeyboardAvoidingView>
     </View>
   );
@@ -126,6 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFE7F5",
     height: "100%",
   },
+<<<<<<< HEAD
 
   error: {
     color: "#FF0101",
@@ -133,6 +176,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
   },
+=======
+>>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
   inputsContainer: {
     backgroundColor: "#fff",
     marginTop: -50,

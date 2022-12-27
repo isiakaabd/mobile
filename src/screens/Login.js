@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 40,
     borderRadius: 20,
-
     marginHorizontal: 30,
     ...SHADOWS.light,
   },
