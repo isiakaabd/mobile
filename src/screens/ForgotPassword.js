@@ -29,12 +29,11 @@ const ForgotPassword = ({ navigation }) => {
   const submitForm = async (values, onSubmitProps) => {
     const { email } = values;
     const { data, error } = await confirmMail({ email });
-    console.log(data);
     if (error || error?.originalStatus === 500) {
       showAlert("Email not Valid");
     }
     if (data) {
-      showAlert(data?.message);
+      showAlert(data.message);
       navigation.replace("ConfirmEmail", { email });
     }
     onSubmitProps.resetForm();

@@ -31,7 +31,7 @@ const ChangePassword = ({ navigation, route }) => {
   });
   const submitForm = async (values, onSubmitProps) => {
     const { confirmPassword, password } = values;
-    console.log(values);
+
     const { data, error } = await reset({
       password_confirmation: confirmPassword,
       password,

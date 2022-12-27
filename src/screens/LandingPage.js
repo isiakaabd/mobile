@@ -1,16 +1,14 @@
-import { StyleSheet, Text, Image, View } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-
 import { Notification, Home, UserProfile, Contact } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import images from "../assets";
 import { useSelector } from "react-redux";
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {
   const user = useSelector((state) => state?.reducer?.user);
-  console.log(user);
+
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator

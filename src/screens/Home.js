@@ -75,7 +75,7 @@ const Home = () => {
           marginTop: 35,
         }}
       >
-        <Image source={images.image08} resizeMode="cover" />
+        <Image source={images.image08} resizeMode="contain" />
         <Text
           style={{
             color: "#23031C",

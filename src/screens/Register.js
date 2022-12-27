@@ -76,14 +76,13 @@ const Register = ({ route, navigation }) => {
       password_confirmation: confirmPassword,
       avatar: image,
     };
-    console.log(newData);
+
     const { data, error } = await register(newData);
-    //
-    console.log(error);
+
     const err = error?.data?.message;
     if (error) {
       showAlert(err);
-    } else {
+    } else if (data) {
       navigation.navigate("Login");
     }
   };

@@ -38,7 +38,6 @@ const Login = ({ navigation }) => {
 
     password: Yup.string().required("Enter your password"),
   });
-  console.log(isLoading);
   const submitForm = async (values, onSubmitProps) => {
     const { email, password } = values;
     const { data, error } = await login({
