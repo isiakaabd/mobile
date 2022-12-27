@@ -17,11 +17,12 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { useState } from "react";
 import * as Yup from "yup";
-import { useLoginMutation } from "../store/api";
+
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 import { useDispatch } from "react-redux";
 import { getUserDetails } from "../store/reducers/authReducer";
+import { useLoginMutation } from "../store/api/authSlice";
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const initialValues = {

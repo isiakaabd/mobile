@@ -1,14 +1,9 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { PersistGate } from "redux-persist/integration/react";
-import { SignUp, Login, Splash, Main, Verify, ForgotPassword } from "~/screens";
 import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import { persistor, store } from "./src/store/store";
 import RouteNavigators from "./src/screens/RouteNavigator";
-
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -34,6 +29,8 @@ export default function App() {
   };
 
   if (!loaded) return null;
+  console.log(store);
+  console.log(persistor);
 
   return (
     <Provider store={store}>

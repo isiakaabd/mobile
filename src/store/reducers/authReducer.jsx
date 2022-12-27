@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const authSlice = createSlice({
-  name: "api",
+  name: "auth",
   initialState: {
     response: null,
     isLoading: false,
@@ -18,9 +18,13 @@ export const authSlice = createSlice({
       state.bearerToken = action.payload.token;
       state.user = action.payload.user;
     },
+    logOut(state, action) {
+      state.user = null;
+      state.bearerToken = null;
+    },
   },
 });
 
 const { reducer, actions } = authSlice;
-export const { getToken, getUserDetails } = actions;
+export const { getToken, getUserDetails, logOut } = actions;
 export default reducer;

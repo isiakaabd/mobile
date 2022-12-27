@@ -9,8 +9,11 @@ import {
 } from "react-native";
 import images from "../assets";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Splash = ({ navigation }) => {
+  const user = useSelector((state) => state?.reducer?.user);
+  console.log(user);
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("Main");

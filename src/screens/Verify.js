@@ -6,7 +6,7 @@ import images from "../assets";
 import Button from "../components/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useVerifyOTPMutation } from "../store/api";
+import { useVerifyOTPMutation } from "../store/api/authSlice";
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 import GlobalStyle from "../utils/GlobalStyle";

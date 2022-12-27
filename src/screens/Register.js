@@ -9,12 +9,12 @@ import * as Yup from "yup";
 import ImagePickers from "../components/ImagePicker";
 import DatePickers from "../components/DatePickers";
 import moment from "moment/moment";
-import { useRegisterMutation } from "../store/api";
+import { useRegisterMutation } from "../store/api/authSlice";
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 const Register = ({ route, navigation }) => {
   const { email } = route.params;
-  const [register, { isLoading }] = useRegisterMutation();
+  const [register, data] = useRegisterMutation();
   const { showAlert } = useAlert();
   const initialValues = {
     firstName: "",
@@ -51,8 +51,7 @@ const Register = ({ route, navigation }) => {
     birthday: Yup.string().required("Date is required"),
   });
 
-  const img =
-    "https://res.cloudinary.com/invoicetor/image/upload/v1661617714/Twitter_Meta_vwouva.png";
+  const img = "https://api.cheers.global/images/profile-picture.png";
   const submitForm = async (values, onSubmitProps) => {
     const {
       firstName,
@@ -178,7 +177,7 @@ const Register = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden={false} />
-      {isLoading && <Loader />}
+      {data.isLoading && <Loader />}
       <>
         <View style={styles.innerContainer}>
           <View

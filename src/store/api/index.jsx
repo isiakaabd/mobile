@@ -1,90 +1,43 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getUserDetails, logOut } from "../reducers/authReducer";
 
-export const api = createApi({
-  reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.cheers.global/api",
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().token;
-      console.log(token);
-      headers.append("Content-Type", "application/json");
-      if (token) {
-        headers.append("X-Access-Token", token);
-      }
-    },
+const baseQuery = fetchBaseQuery({
+  baseUrl: "https://api.cheers.global/api",
 
-    // headers: { },
-  }),
-  tagTypes: ["GenerateEndPoint"],
-
-  endpoints: (builder) => ({
-    generateOTP: builder.mutation({
-      query: (body) => ({
-        url: "/generate_otp",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-    verifyOTP: builder.mutation({
-      query: (body) => ({
-        url: "/verify_otp",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-    register: builder.mutation({
-      query: (body) => ({
-        url: "/register",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-      transformResponse: (response) => response.data,
-    }),
-    login: builder.mutation({
-      query: (body) => ({
-        url: "/login",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-    forgotPassword: builder.mutation({
-      query: (body) => ({
-        url: "/forgot-password-link",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-    forgotPasswordLinkConfirm: builder.mutation({
-      query: (body) => ({
-        url: "/forgot-password-link-confirm",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-    forgotPasswordLinkReset: builder.mutation({
-      query: (body) => ({
-        url: "/forgot-password-link-reset",
-        method: "POST",
-        body: JSON.stringify(body),
-      }),
-
-      invalidatesTags: ["GenerateEndPoint"],
-    }),
-  }),
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().token;
+    const bearerToken = getState().bearerToken;
+    headers.append("Content-Type", "application/json");
+    if (token) {
+      headers.append("X-Access-Token", token);
+    }
+    if (bearerToken) {
+      headers.append("AUTHORIZATION", `${bearerToken}`);
+    }
+  },
 });
 
-export const {
-  useGenerateOTPMutation,
-  useVerifyOTPMutation,
-  useRegisterMutation,
-  useLoginMutation,
-  useForgotPasswordMutation,
-  useForgotPasswordLinkConfirmMutation,
-  useForgotPasswordLinkResetMutation,
-} = api;
+const baseQuerywithAuth = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+  if (result?.error?.originalStatus === 403) {
+    console.log(`sending refresh token`);
+    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    console.log(refreshResult);
+    if (refreshResult?.data) {
+      api.dispatch(getUserDetails(refreshResult));
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      await baseQuery("/logout", api, extraOptions);
+      api.dispatch(logOut());
+    }
+  }
+  console.log(result);
+  return result;
+};
+
+export const api = createApi({
+  // reducerPath: "api",
+  baseQuery: baseQuerywithAuth,
+  tagTypes: ["GenerateEndPoint"],
+  endpoints: () => ({}),
+});

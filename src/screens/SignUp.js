@@ -13,7 +13,7 @@ import * as Yup from "yup";
 import { Button, Input } from "~/components";
 // "~/src/components";
 import { Formik } from "formik";
-import { useGenerateOTPMutation } from "../store/api";
+import { useGenerateOTPMutation } from "../store/api/authSlice";
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 import { useEffect } from "react";

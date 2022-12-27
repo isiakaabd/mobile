@@ -13,7 +13,7 @@ import { Button, Input } from "~/components";
 import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useForgotPasswordMutation } from "../store/api";
+import { useForgotPasswordMutation } from "../store/api/authSlice";
 import useAlert from "../components/Alert";
 import { Loader } from "../components";
 

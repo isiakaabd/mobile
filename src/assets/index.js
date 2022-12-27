@@ -6,14 +6,22 @@ import image04 from "./images/image04.png";
 import image05 from "./images/image05.png";
 import image06 from "./images/image06.png";
 import image07 from "./images/image07.png";
+import image08 from "./images/image08.png";
 import cheers from "./images/cheers.png";
 import logo2 from "./images/Logo_purple.png";
 import phone from "./images/smartphone.png";
+import cake from "./images/cake.png";
+import polygon from "./images/polygon.png";
+import line from "./images/line.png";
+import line2 from "./images/line2.png";
 
 export default {
   logo,
+  polygon,
   logo2,
   cheers,
+  line2,
+  line,
   image01,
   phone,
   image02,
@@ -22,4 +30,6 @@ export default {
   image04,
   image05,
   image07,
+  image08,
+  cake,
 };

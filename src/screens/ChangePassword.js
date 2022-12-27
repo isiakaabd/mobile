@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import * as Yup from "yup";
-import { useForgotPasswordLinkResetMutation } from "../store/api";
+import { useForgotPasswordLinkResetMutation } from "../store/api/authSlice";
 import { Loader } from "../components";
 import useAlert from "../components/Alert";
 const ChangePassword = ({ navigation, route }) => {

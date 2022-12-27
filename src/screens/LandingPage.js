@@ -1,54 +1,89 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, Image, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { Notification, Home, UserProfile } from ".";
+import { Notification, Home, UserProfile, Contact } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import FontAwesome, {
-  //   So,
-  //   RegularIcons,
-  //   BrandIcons,
-  //   parseIconFromClassName,
-  FontAwesome5IconVariants,
-} from "react-native-vector-icons/FontAwesome5";
-
+import images from "../assets";
+import { useSelector } from "react-redux";
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {
+  const user = useSelector((state) => state?.reducer?.user);
+  console.log(user);
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator
         initialRouteName="Home"
         backBehavior="none"
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused, color }) => {
             let iconName;
 
             if (route.name === "Home") {
-              iconName = focused ? "home" : "house";
-            } else if (route.name === "User") {
-              iconName = focused ? "users" : "user";
+              iconName = "home";
+            } else if (route.name === "Contact") {
+              iconName = "user";
+            } else if (route.name === "Notification") {
+              iconName = "bell";
             }
 
             // You can return any component that you like here!
-            return (
+            return route.name !== "User" ? (
               <FontAwesome5
-                // name={!eye ? "eye" : "eye-slash"}
-                // size={15}
+                solid={focused}
                 name={iconName}
-                size={size}
+                size={24}
                 color={color}
-
-                // onPress={() => setEye(!eye)}
               />
+            ) : (
+              <View
+                style={{
+                  height: 27,
+                  borderRadius: 50,
+                  width: 27,
+                  padding: 2,
+                  overflow: "hidden",
+                  backgroundColor: "red",
+                }}
+              >
+                <Image
+                  source={{ uri: user?.avatar }}
+                  style={{ height: "100%", width: 24 }}
+                  resizeMode="contain"
+                />
+              </View>
             );
           },
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "gray",
+          headerShown: false,
+          tabBarLabel: ({ focused }) => (
+            <View
+              style={{
+                height: 6,
+                width: 6,
+                borderRadius: 50,
+                backgroundColor: focused ? "#D20C83" : "transparent",
+              }}
+            />
+          ),
+          tabBarStyle: {
+            padding: 5,
+            height: 80,
+            paddingBottom: 10,
+            backgroundColor: "#fff",
+          },
+          tabBarActiveTintColor: "#D20C83",
+          //   tabBarShowLabel: false,
+          tabBarInactiveTintColor: "#BA9EC3",
         })}
       >
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Notification" component={Notification} />
+        <Tab.Screen
+          name="Notification"
+          component={Notification}
+          options={{ tabBarBadge: 3 }}
+        />
+        <Tab.Screen name="Contact" component={Contact} />
         <Tab.Screen name="User" component={UserProfile} />
       </Tab.Navigator>
     </NavigationContainer>
