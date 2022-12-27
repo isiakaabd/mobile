@@ -15,13 +15,12 @@ const Input = ({ properties, style, name, ...rest }) => {
           {...rest}
           onChangeText={handleChange(name)}
           onBlur={handleBlur(name)}
-          // {...field}
           value={values[name]}
           secureTextEntry={
             name === "password" || name === "confirmPassword" ? eye : false
           }
           nativeID={name}
-          // onChangeText={field.onChange}
+          
           cursorColor="#822E6F"
           autoComplete="off"
           style={[styles.input, { ...style }]}

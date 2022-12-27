@@ -214,7 +214,6 @@ const Register = ({ route, navigation }) => {
         >
           {({ handleSubmit, errors }) => (
             <View style={styles.inputsContainer}>
-              {console.log(errors)}
               <View
                 style={{
                   height: 100,

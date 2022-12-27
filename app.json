@@ -1,6 +1,5 @@
 {
   "expo": {
-<<<<<<< HEAD
     "name": "Cheers-mobile",
     "slug": "Cheers-mobile",
     "version": "1.0.0",
@@ -9,23 +8,12 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-=======
-    "name": "Cheers",
-    "slug": "Cheers",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./src/assets/splash.png",
->>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-<<<<<<< HEAD
     "plugins": [
       [
         "expo-image-picker",
@@ -34,29 +22,19 @@
         }
       ]
     ],
-=======
->>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-<<<<<<< HEAD
         "foregroundImage": "./assets/adaptive-icon.png",
-=======
-        "foregroundImage": "./src/assets/adaptive-icon.png",
->>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
-<<<<<<< HEAD
       "favicon": "./assets/favicon.png"
-=======
-      "favicon": "./src/assets/favicon.png"
->>>>>>> ac6b9fd12829920f61efb0ce09cc071768de9498
     }
   }
 }
