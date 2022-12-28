@@ -97,7 +97,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     paddingTop: StatusBar.currentHeight + 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: "#FCF8FA",
   },

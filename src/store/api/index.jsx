@@ -32,7 +32,7 @@ const baseQuerywithAuth = async (args, api, extraOptions) => {
       api.dispatch(logOut());
     }
   }
-  console.log(result);
+
   return result;
 };
 

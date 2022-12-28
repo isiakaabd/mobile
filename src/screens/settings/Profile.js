@@ -11,9 +11,17 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import images from "../../assets";
 import ListItem from "./ListItem";
 import { FONTS } from "../../utils/fonts";
+import { useLogoutMutation } from "../../store/api/authSlice";
+import { Loader } from "../../components";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/reducers/authReducer";
+import useAlert from "../../components/Alert";
 
 const Profile = ({ navigation }) => {
   const { profile, edit, radio, info } = images;
+  const [logout, { isLoading }] = useLogoutMutation();
+  const { showAlert } = useAlert();
+  const dispatch = useDispatch();
   const data = [
     {
       icon: edit,
@@ -36,6 +44,17 @@ const Profile = ({ navigation }) => {
       link: "Support",
     },
   ];
+  const handleLogout = async () => {
+    const { data, error } = await logout();
+    dispatch(logOut());
+    if (data) {
+      showAlert(data?.message);
+    } else if (error) {
+      showAlert(error?.message);
+    }
+    navigation.navigate("Login");
+  };
+  if (isLoading) return <Loader />;
   return (
     <SafeAreaView>
       <View>
@@ -49,6 +68,7 @@ const Profile = ({ navigation }) => {
         />
       </View>
       <TouchableOpacity
+        onPress={handleLogout}
         style={{
           borderRadius: 50,
           borderWidth: 1,

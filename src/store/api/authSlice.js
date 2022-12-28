@@ -64,6 +64,14 @@ export const authSlice = api.injectEndpoints({
 
       invalidatesTags: ["GenerateEndPoint"],
     }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+
+      invalidatesTags: ["GenerateEndPoint"],
+    }),
   }),
 });
 
@@ -72,6 +80,7 @@ export const {
   useVerifyOTPMutation,
   useRegisterMutation,
   useLoginMutation,
+  useLogoutMutation,
   useForgotPasswordMutation,
   useForgotPasswordLinkConfirmMutation,
   useForgotPasswordLinkResetMutation,
