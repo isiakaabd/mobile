@@ -43,7 +43,7 @@ const LandingPage = () => {
                   width: 27,
                   padding: 2,
                   overflow: "hidden",
-                  backgroundColor: "red",
+                  backgroundColor: "rgba(63, 3, 49, .8)",
                 }}
               >
                 <Image
@@ -72,7 +72,6 @@ const LandingPage = () => {
             backgroundColor: "#fff",
           },
           tabBarActiveTintColor: "#D20C83",
-          //   tabBarShowLabel: false,
           tabBarInactiveTintColor: "#BA9EC3",
         })}
       >

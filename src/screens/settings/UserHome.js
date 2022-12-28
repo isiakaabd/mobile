@@ -6,6 +6,7 @@ import {
   View,
   TouchableHighlight,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { useState } from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -26,21 +27,17 @@ const UserHome = ({ navigation }) => {
         <View style={styles.top}>
           <View style={styles.semi} />
           <View>
-            <View
-              style={styles.settings}
-              // onStartShouldSetResponder={() => navigation.navigate("Profile")}
-              // onPress={() => navigation.navigate("Profile")}
+            <Pressable
+              style={[styles.settings, { zIndex: 30 }]}
+              onPress={() => navigation.navigate("Settings")}
             >
-              <FontAwesome5
-                name="home"
+              <Image
                 size={17}
-                // style={styles.settings}
-                style={{ zIndex: 25 }}
-                // style={[styles.settings, { borderWidth: 2, padding: 20 }]}
+                source={images.setting}
+                style={[{ zIndex: 25, width: 30, height: 30 }]}
                 color="#3F0331"
-                onPress={() => navigation.navigate("Settings")}
               />
-            </View>
+            </Pressable>
             <Image
               source={images.line3}
               resizeMode="contain"
@@ -145,6 +142,7 @@ const UserHome = ({ navigation }) => {
                 source={images.wallet}
                 style={{
                   height: 20,
+                  width: 20,
                 }}
                 resizeMode="contain"
               />
@@ -173,7 +171,7 @@ const UserHome = ({ navigation }) => {
               <Image
                 source={images.send}
                 resizeMode="contain"
-                style={{ height: 20 }}
+                style={{ height: 20, width: 20 }}
               />
               <Text style={[styles.buttonText, { color: "#D20C83" }]}>
                 View Messages

@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { UserHome, Profile, Wallet, Message } from "./settings/index";
@@ -7,15 +7,70 @@ import images from "../assets";
 
 import { Support, EditProfile, About, Account } from "./options";
 const Stack = createNativeStackNavigator();
-const UserProfile = () => {
+const UserProfile = ({ navigation }) => {
+  const Button = () => {
+    return (
+      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+        <Image
+          resizeMode="contain"
+          source={images.back}
+          style={{
+            marginLeft: -30,
+            height: 40,
+            tintColor: "#fff",
+          }}
+        />
+      </TouchableWithoutFeedback>
+    );
+  };
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        statusBarColor: "#3F0331",
+        statusBarTranslucent: true,
+      }}
       initialRouteName="UserHome"
     >
       <Stack.Screen name="UserHome" component={UserHome} />
-      <Stack.Screen name="Message" component={Message} />
-      <Stack.Screen name="Wallet" component={Wallet} />
+      <Stack.Screen
+        name="Message"
+        options={({ route }) => ({
+          headerShown: true,
+
+          title: route.params,
+          headerStyle: {
+            backgroundColor: "#3F0331",
+          },
+          statusBarColor: "#3F0331",
+          statusBarTranslucent: true,
+          headerTitleStyle: {
+            fontFamily: FONTS.MulishBold,
+            color: "#fff",
+          },
+          headerLeft: () => <Button />,
+        })}
+        component={Message}
+      />
+      <Stack.Screen
+        name="Wallet"
+        options={({ route }) => ({
+          headerShown: true,
+
+          title: route.params,
+          headerStyle: {
+            backgroundColor: "#3F0331",
+          },
+          statusBarColor: "#3F0331",
+          statusBarTranslucent: true,
+          headerTitleStyle: {
+            fontFamily: FONTS.MulishBold,
+            color: "#fff",
+          },
+          headerLeft: () => <Button />,
+        })}
+        component={Wallet}
+      />
       <Stack.Screen name="Support" component={Support} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="About" component={About} />
@@ -30,22 +85,14 @@ const UserProfile = () => {
           headerStyle: {
             backgroundColor: "#3F0331",
           },
-          statusBarColor: "#F8EAF2",
-          headerTintColor: "#fff",
+          statusBarColor: "#3F0331",
+          statusBarTranslucent: true,
+
           headerTitleStyle: {
             fontFamily: FONTS.MulishBold,
+            color: "#fff",
           },
-          headerLeft: () => (
-            <Image
-              resizeMode="contain"
-              source={images.back}
-              style={{
-                marginLeft: -30,
-                height: 40,
-                tintColor: "#fff",
-              }}
-            />
-          ),
+          headerLeft: () => <Button />,
         })}
       />
     </Stack.Navigator>

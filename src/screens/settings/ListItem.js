@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import images from "../../assets";
-import { FONTS } from "../../utils/fonts";
+import { FONTS, SHADOWS } from "../../utils/fonts";
 const ListItem = ({ navigation, item }) => {
   const { title, icon, link } = item;
   return (
@@ -9,7 +9,10 @@ const ListItem = ({ navigation, item }) => {
       style={styles.container}
       onPress={() => navigation.navigate(link)}
     >
-      <Image source={icon} style={{ width: 40, height: 40 }} />
+      <Image
+        source={icon}
+        style={{ width: 40, height: 40, ...SHADOWS.light }}
+      />
       <Text
         style={{
           color: "#000",
