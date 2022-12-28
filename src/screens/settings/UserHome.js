@@ -26,24 +26,23 @@ const UserHome = ({ navigation }) => {
       <View style={{ width: "100%" }}>
         <View style={styles.top}>
           <View style={styles.semi} />
-          <View>
-            <Pressable
-              style={[styles.settings, { zIndex: 30 }]}
-              onPress={() => navigation.navigate("Settings")}
-            >
-              <Image
-                size={17}
-                source={images.setting}
-                style={[{ zIndex: 25, width: 30, height: 30 }]}
-                color="#3F0331"
-              />
-            </Pressable>
+
+          <Pressable
+            style={[styles.settings, { zIndex: 30 }]}
+            onPress={() => navigation.navigate("Settings")}
+          >
             <Image
-              source={images.line3}
-              resizeMode="contain"
-              style={styles.image}
+              size={17}
+              source={images.setting}
+              style={[{ zIndex: 25, width: 30, height: 30 }]}
+              color="#3F0331"
             />
-          </View>
+          </Pressable>
+          <Image
+            source={images.line3}
+            resizeMode="contain"
+            style={styles.image}
+          />
         </View>
       </View>
       <View style={styles.imageContainer}>

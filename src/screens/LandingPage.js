@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Notification, Home, UserProfile, Contact } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
-import Settings from "./Settings";
+
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {

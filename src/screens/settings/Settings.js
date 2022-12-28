@@ -52,7 +52,7 @@ const Profile = ({ navigation }) => {
     } else if (error) {
       showAlert(error?.message);
     }
-    navigation.navigate("Login");
+    navigation.navigate("RouteNavigators", { screen: "Login" });
   };
   if (isLoading) return <Loader />;
   return (

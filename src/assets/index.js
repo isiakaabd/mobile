@@ -31,11 +31,13 @@ import radio from "./images/radio.png";
 import back from "./images/back.png";
 import Arrow from "./images/Arrow.png";
 import setting from "./images/setting.png";
+import camera from "./images/camera.png";
 
 export default {
   Arrow,
   back,
   logo,
+  camera,
   info,
   edit,
   edit2,

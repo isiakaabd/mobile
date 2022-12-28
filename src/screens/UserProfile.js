@@ -1,11 +1,11 @@
 import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { UserHome, Profile, Wallet, Message } from "./settings/index";
+import { UserHome, Wallet, Message, Settings } from "./settings/index";
 import { FONTS } from "../utils/fonts";
 import images from "../assets";
-
 import { Support, EditProfile, About, Account } from "./options";
+
 const Stack = createNativeStackNavigator();
 const UserProfile = ({ navigation }) => {
   const Button = () => {
@@ -26,32 +26,30 @@ const UserProfile = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         statusBarColor: "#3F0331",
         statusBarTranslucent: true,
+        headerTitleStyle: {
+          fontFamily: FONTS.MulishBold,
+          color: "#fff",
+        },
+        headerStyle: {
+          backgroundColor: "#3F0331",
+        },
+        headerLeft: () => <Button />,
       }}
+      options={({ route }) => ({
+        title: route.params,
+      })}
       initialRouteName="UserHome"
     >
-      <Stack.Screen name="UserHome" component={UserHome} />
       <Stack.Screen
-        name="Message"
-        options={({ route }) => ({
-          headerShown: true,
-
-          title: route.params,
-          headerStyle: {
-            backgroundColor: "#3F0331",
-          },
-          statusBarColor: "#3F0331",
-          statusBarTranslucent: true,
-          headerTitleStyle: {
-            fontFamily: FONTS.MulishBold,
-            color: "#fff",
-          },
-          headerLeft: () => <Button />,
-        })}
-        component={Message}
+        name="UserHome"
+        component={UserHome}
+        options={{ headerShown: false }}
       />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Message" component={Message} />
       <Stack.Screen
         name="Wallet"
         options={({ route }) => ({
@@ -75,26 +73,7 @@ const UserProfile = ({ navigation }) => {
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen
-        name="Settings"
-        component={Profile}
-        options={({ route }) => ({
-          headerShown: true,
-
-          title: route.params,
-          headerStyle: {
-            backgroundColor: "#3F0331",
-          },
-          statusBarColor: "#3F0331",
-          statusBarTranslucent: true,
-
-          headerTitleStyle: {
-            fontFamily: FONTS.MulishBold,
-            color: "#fff",
-          },
-          headerLeft: () => <Button />,
-        })}
-      />
+      {/* <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
   );
 };
