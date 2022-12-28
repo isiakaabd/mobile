@@ -16,12 +16,30 @@ import polygon from "./images/polygon.png";
 import line from "./images/line.png";
 import line2 from "./images/line2.png";
 import line3 from "./images/line3.png";
+import send from "./images/send.png";
+import wallet from "./images/wallet.png";
+import info from "./images/info.png";
+import edit from "./images/edit.png";
+import edit2 from "./images/edit2.png";
+import profile from "./images/profile.png";
+import radio from "./images/radio.png";
+import back from "./images/back.png";
+import Arrow from "./images/Arrow.png";
 
 export default {
+  Arrow,
+  back,
   logo,
+  info,
+  edit,
+  edit2,
+  profile,
+  radio,
   polygon,
   logo2,
   calendar,
+  send,
+  wallet,
   cheers,
   line2,
   line,

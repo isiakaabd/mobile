@@ -1,5 +1,13 @@
-import { StyleSheet, SafeAreaView, Image, Text, View } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  Text,
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native";
+import { useState } from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import images from "../../assets";
 import { FONTS, SHADOWS } from "../../utils/fonts";
@@ -8,9 +16,10 @@ import { Loader } from "../../components";
 
 const UserHome = ({ navigation }) => {
   const { data, error, isLoading } = useProfileQuery();
-
+  const [color, setColor] = useState(false);
   if (isLoading) return <Loader />;
   const { avatar, first_name, last_name, username, date_of_birth } = data;
+
   return (
     <View style={styles.container}>
       <View style={{ width: "100%" }}>
@@ -29,7 +38,7 @@ const UserHome = ({ navigation }) => {
                 style={{ zIndex: 25 }}
                 // style={[styles.settings, { borderWidth: 2, padding: 20 }]}
                 color="#3F0331"
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => navigation.navigate("Settings")}
               />
             </View>
             <Image
@@ -68,7 +77,7 @@ const UserHome = ({ navigation }) => {
             resizeMode="contain"
           />
         </View>
-        <View style={{ marginTop: 70 }}>
+        <View style={{ marginTop: 50 }}>
           <Text style={styles.text}>{`${first_name} ${last_name}`}</Text>
           <View
             style={{
@@ -91,13 +100,85 @@ const UserHome = ({ navigation }) => {
               {`@${username}`}
             </Text>
           </View>
-          <View>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row",
+            }}
+          >
             <Image
               source={images.calendar}
               resizeMode="contain"
-              style={{ width: 20, height: 20 }}
+              style={{ width: 20, margin: 10, height: 20 }}
             />
-            <Text>{date_of_birth}</Text>
+            <Text
+              style={{
+                color: "#3F0331",
+                fontSize: 14,
+                fontFamily: FONTS.MulishBold,
+              }}
+            >
+              {date_of_birth}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              paddingHorizontal: 30,
+              marginTop: 15,
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Wallet")}
+              style={[
+                styles.button,
+                {
+                  backgroundColor: "#D20C83",
+                  borderColor: "#D20C83",
+                  marginRight: 20,
+                },
+              ]}
+            >
+              <Image
+                source={images.wallet}
+                style={{
+                  height: 20,
+                }}
+                resizeMode="contain"
+              />
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: "#fff",
+                  },
+                ]}
+              >
+                View Wallet
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Message")}
+              style={[
+                styles.button,
+                {
+                  backgroundColor: "#fff",
+                  borderWidth: 1,
+                  borderColor: `${!color ? "#D20C83" : "#fff"}`,
+                },
+              ]}
+            >
+              <Image
+                source={images.send}
+                resizeMode="contain"
+                style={{ height: 20 }}
+              />
+              <Text style={[styles.buttonText, { color: "#D20C83" }]}>
+                View Messages
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -108,6 +189,22 @@ const UserHome = ({ navigation }) => {
 export default UserHome;
 
 const styles = StyleSheet.create({
+  buttonText: {
+    color: "#fff",
+    marginLeft: 5,
+    fontSize: 12,
+    fontFamily: FONTS.MulishBold,
+  },
+  button: {
+    paddingVertical: 10,
+
+    paddingHorizontal: 10,
+    borderWidth: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 50,
+    justifyContent: "center",
+  },
   image2: {
     position: "absolute",
     left: "35%",
@@ -131,8 +228,8 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: -50,
     borderRadius: 30,
-    marginHorizontal: 30,
-    height: 300,
+    marginHorizontal: 20,
+    paddingBottom: 20,
     backgroundColor: "#fff",
     ...SHADOWS.medium,
   },

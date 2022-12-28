@@ -1,14 +1,75 @@
-import { StyleSheet, SafeAreaView, Text, View } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import images from "../../assets";
+import ListItem from "./ListItem";
+import { FONTS } from "../../utils/fonts";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
+  const { profile, edit, radio, info } = images;
+  const data = [
+    {
+      icon: edit,
+      title: "Edit Profile",
+      link: "EditProfile",
+    },
+    {
+      icon: profile,
+      title: "Account",
+      link: "Account",
+    },
+    {
+      icon: info,
+      title: "About",
+      link: "About",
+    },
+    {
+      icon: radio,
+      title: "Support",
+      link: "Support",
+    },
+  ];
   return (
     <SafeAreaView>
       <View>
-        <Text>Hello</Text>
+        <FlatList
+          data={data}
+          contentContainerStyle={{ marginTop: 40 }}
+          renderItem={({ item }) => (
+            <ListItem item={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item.title}
+        />
       </View>
+      <TouchableOpacity
+        style={{
+          borderRadius: 50,
+          borderWidth: 1,
+          borderColor: "#D20C83",
+          backgroundColor: "transparent",
+          padding: 20,
+          marginTop: 80,
+          marginHorizontal: 20,
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#D20C83",
+            fontFamily: FONTS.MulishBold,
+            fontSize: 16,
+          }}
+        >
+          Log out
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

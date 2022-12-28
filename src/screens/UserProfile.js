@@ -1,8 +1,11 @@
-import { StyleSheet, SafeAreaView, Text, View, Image } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { UserHome, Profile } from "./settings/index";
+import { UserHome, Profile, Wallet, Message } from "./settings/index";
+import { FONTS } from "../utils/fonts";
+import images from "../assets";
 
+import { Support, EditProfile, About, Account } from "./options";
 const Stack = createNativeStackNavigator();
 const UserProfile = () => {
   return (
@@ -11,10 +14,39 @@ const UserProfile = () => {
       initialRouteName="UserHome"
     >
       <Stack.Screen name="UserHome" component={UserHome} />
+      <Stack.Screen name="Message" component={Message} />
+      <Stack.Screen name="Wallet" component={Wallet} />
+      <Stack.Screen name="Support" component={Support} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Account" component={Account} />
       <Stack.Screen
-        name="Profile"
+        name="Settings"
         component={Profile}
-        options={{ headerShown: true }}
+        options={({ route }) => ({
+          headerShown: true,
+
+          title: route.params,
+          headerStyle: {
+            backgroundColor: "#3F0331",
+          },
+          statusBarColor: "#F8EAF2",
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontFamily: FONTS.MulishBold,
+          },
+          headerLeft: () => (
+            <Image
+              resizeMode="contain"
+              source={images.back}
+              style={{
+                marginLeft: -30,
+                height: 40,
+                tintColor: "#fff",
+              }}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
