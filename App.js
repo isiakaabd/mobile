@@ -29,12 +29,9 @@ export default function App() {
   };
 
   if (!loaded) return null;
-  console.log(store);
-  console.log(persistor);
 
   return (
     <Provider store={store}>
-      {/* <ApiProvider api={api}> */}
       <PersistGate persistor={persistor}>
         <NavigationContainer theme={theme}>
           <RouteNavigators />

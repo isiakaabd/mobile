@@ -11,17 +11,21 @@ import cheers from "./images/cheers.png";
 import logo2 from "./images/Logo_purple.png";
 import phone from "./images/smartphone.png";
 import cake from "./images/cake.png";
+import calendar from "./images/calendar.png";
 import polygon from "./images/polygon.png";
 import line from "./images/line.png";
 import line2 from "./images/line2.png";
+import line3 from "./images/line3.png";
 
 export default {
   logo,
   polygon,
   logo2,
+  calendar,
   cheers,
   line2,
   line,
+  line3,
   image01,
   phone,
   image02,

@@ -1,26 +1,19 @@
-import { StyleSheet, SafeAreaView, Text, View, Image } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet, SafeAreaView, Text, View } from "react-native";
+import React from "react";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import images from "../../assets";
 
-import { UserHome, Profile } from "./settings/index";
-
-const Stack = createNativeStackNavigator();
-const UserProfile = () => {
+const Profile = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="UserHome"
-    >
-      <Stack.Screen name="UserHome" component={UserHome} />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{ headerShown: true }}
-      />
-    </Stack.Navigator>
+    <SafeAreaView>
+      <View>
+        <Text>Hello</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
-export default UserProfile;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

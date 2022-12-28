@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Notification, Home, UserProfile, Contact } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
+import Settings from "./Settings";
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {
@@ -27,7 +28,7 @@ const LandingPage = () => {
             }
 
             // You can return any component that you like here!
-            return route.name !== "User" ? (
+            return route.name !== "UserProfile" ? (
               <FontAwesome5
                 solid={focused}
                 name={iconName}
@@ -82,7 +83,7 @@ const LandingPage = () => {
           options={{ tabBarBadge: 3 }}
         />
         <Tab.Screen name="Contact" component={Contact} />
-        <Tab.Screen name="User" component={UserProfile} />
+        <Tab.Screen name="UserProfile" component={UserProfile} />
       </Tab.Navigator>
     </NavigationContainer>
   );

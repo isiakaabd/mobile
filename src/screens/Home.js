@@ -72,7 +72,7 @@ const Home = () => {
           flex: 1,
           justifyContent: "flex-start",
           alignItems: "center",
-          marginTop: 35,
+          marginTop: 15,
         }}
       >
         <Image source={images.image08} resizeMode="contain" />
@@ -96,7 +96,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: StatusBar.currentHeight + 20,
     paddingHorizontal: 30,
     flex: 1,
     backgroundColor: "#FCF8FA",

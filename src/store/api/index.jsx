@@ -5,14 +5,15 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "https://api.cheers.global/api",
 
   prepareHeaders: (headers, { getState }) => {
+    console.log(getState().reducer.bearerToken, "state");
     const token = getState().token;
-    const bearerToken = getState().bearerToken;
+    const bearerToken = getState().reducer.bearerToken;
     headers.append("Content-Type", "application/json");
     if (token) {
       headers.append("X-Access-Token", token);
     }
     if (bearerToken) {
-      headers.append("AUTHORIZATION", `${bearerToken}`);
+      headers.append("AUTHORIZATION", `Bearer ${bearerToken}`);
     }
   },
 });
