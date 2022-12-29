@@ -21,7 +21,11 @@ const RouteNavigators = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        statusBarColor: "#3F0331",
+        statusBarTranslucent: true,
+      }}
       initialRouteName="Splash"
     >
       {!accessToken ? (

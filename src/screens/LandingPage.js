@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Notification, Home, UserProfile, Contact } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
+
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {
@@ -27,7 +28,7 @@ const LandingPage = () => {
             }
 
             // You can return any component that you like here!
-            return route.name !== "User" ? (
+            return route.name !== "UserProfile" ? (
               <FontAwesome5
                 solid={focused}
                 name={iconName}
@@ -42,7 +43,7 @@ const LandingPage = () => {
                   width: 27,
                   padding: 2,
                   overflow: "hidden",
-                  backgroundColor: "red",
+                  backgroundColor: "rgba(63, 3, 49, .8)",
                 }}
               >
                 <Image
@@ -71,7 +72,6 @@ const LandingPage = () => {
             backgroundColor: "#fff",
           },
           tabBarActiveTintColor: "#D20C83",
-          //   tabBarShowLabel: false,
           tabBarInactiveTintColor: "#BA9EC3",
         })}
       >
@@ -82,7 +82,7 @@ const LandingPage = () => {
           options={{ tabBarBadge: 3 }}
         />
         <Tab.Screen name="Contact" component={Contact} />
-        <Tab.Screen name="User" component={UserProfile} />
+        <Tab.Screen name="UserProfile" component={UserProfile} />
       </Tab.Navigator>
     </NavigationContainer>
   );

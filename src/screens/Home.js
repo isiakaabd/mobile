@@ -16,9 +16,9 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <View>
         <Image
-          style={{ width: 143, height: 73 }}
+          style={{ width: 140, height: 80 }}
           resizeMode="contain"
-          source={images.cheers}
+          source={images.cheers3}
         />
       </View>
       <View>
@@ -72,10 +72,14 @@ const Home = () => {
           flex: 1,
           justifyContent: "flex-start",
           alignItems: "center",
-          marginTop: 35,
+          marginTop: 15,
         }}
       >
-        <Image source={images.image08} resizeMode="contain" />
+        <Image
+          source={images.cake2}
+          style={{ height: 150 }}
+          resizeMode="contain"
+        />
         <Text
           style={{
             color: "#23031C",
@@ -97,7 +101,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     paddingTop: StatusBar.currentHeight,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: "#FCF8FA",
   },

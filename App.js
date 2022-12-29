@@ -32,7 +32,6 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      {/* <ApiProvider api={api}> */}
       <PersistGate persistor={persistor}>
         <NavigationContainer theme={theme}>
           <RouteNavigators />

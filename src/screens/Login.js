@@ -29,8 +29,6 @@ const Login = ({ navigation }) => {
     email: "",
     password: "",
   };
-  const { showAlert } = useAlert();
-  const [login, { isLoading }] = useLoginMutation();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Must be a valid Email")
@@ -38,6 +36,9 @@ const Login = ({ navigation }) => {
 
     password: Yup.string().required("Enter your password"),
   });
+  const { showAlert } = useAlert();
+  const [login, { isLoading }] = useLoginMutation();
+
   const submitForm = async (values, onSubmitProps) => {
     const { email, password } = values;
     const { data, error } = await login({
