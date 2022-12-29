@@ -98,7 +98,7 @@ const EditProfile = () => {
             <View style={styles.button}>
               <Button
                 text="Save"
-                backgroundColor={"#D20C83"}
+                backgroundColor="#D20C83"
                 handlePress={handleSubmit}
                 disabled={isSubmitting && !isValid}
               />
