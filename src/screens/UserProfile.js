@@ -81,7 +81,7 @@ const UserProfile = ({ navigation }) => {
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="AddFriends" component={AddFriends} options={{}} />
+      <Stack.Screen name="AddFriends" component={AddFriends} />
       <Stack.Screen name="InviteFriends" component={InviteFriends} />
       <Stack.Screen name="ImportContacts" component={ImportContacts} />
 
