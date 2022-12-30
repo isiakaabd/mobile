@@ -1,10 +1,18 @@
-import { StyleSheet, Image, View } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { Notification, Home, UserProfile, Contact } from ".";
+import { Notification, Home, UserProfile, Contacts } from ".";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
-
+import { FONTS } from "../utils/fonts";
+import images from "../assets";
+import { useState } from "react";
+import ContactNavigator from "./ContactNavigator";
 const Tab = createBottomTabNavigator();
 
 const LandingPage = () => {
@@ -81,7 +89,23 @@ const LandingPage = () => {
           component={Notification}
           options={{ tabBarBadge: 3 }}
         />
-        <Tab.Screen name="Contact" component={Contact} />
+        <Tab.Screen
+          name="Contact"
+          // initialParams={[2]}
+          component={ContactNavigator}
+          // options={({ route }) => ({
+          //   title: route.params,
+          //   headerShown: true,
+          //   headerStyle: {
+          //     backgroundColor: "#3F0331",
+          //   },
+          //   headerTitleStyle: {
+          //     fontFamily: FONTS.MulishBold,
+          //     paddingLeft: 20,
+          //     color: "#fff",
+          //   },
+          // })}
+        />
         <Tab.Screen name="UserProfile" component={UserProfile} />
       </Tab.Navigator>
     </NavigationContainer>

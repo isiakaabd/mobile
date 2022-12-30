@@ -1,21 +1,32 @@
-import { StyleSheet, Image, TouchableWithoutFeedback } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import {
-  UserHome,
-  Wallet,
-  Message,
-  Settings,
-  AddFriends,
-  InviteFriends,
-  ImportContacts,
-} from "./settings/index";
+import { AddFriends, InviteFriends, ImportContacts } from "./settings/index";
 import { FONTS } from "../utils/fonts";
 import images from "../assets";
-import { Support, EditProfile, About, Account } from "./options";
+import Contacts from "./Contacts";
 
 const Stack = createNativeStackNavigator();
-const UserProfile = ({ navigation }) => {
+const ContactNavigator = ({ navigation }) => {
+  //   const [open, setOpen] = useState(false);
+  //   useEffect(() => {
+  //     navigation.setOptions({
+  //       headerRight: () => (
+  //         <TouchableOpacity onPress={() => setOpen(true)}>
+  //           <Image
+  //             source={images.dots}
+  //             resizeMode="contain"
+  //             style={{ height: 20, marginRight: 20 }}
+  //           />
+  //         </TouchableOpacity>
+  //       ),
+  //     });
+  //   }, [navigation]);
   const Button = () => {
     return (
       <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
@@ -49,48 +60,22 @@ const UserProfile = ({ navigation }) => {
       options={({ route }) => ({
         title: route.params,
       })}
-      initialRouteName="UserHome"
+      initialRouteName="Contacts"
     >
       <Stack.Screen
-        name="UserHome"
-        component={UserHome}
-        options={{ headerShown: false }}
+        name="Contacts"
+        component={Contacts}
+        options={{ headerShown: true, headerLeft: null }}
       />
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Message" component={Message} />
-      <Stack.Screen
-        name="Wallet"
-        options={({ route }) => ({
-          headerShown: true,
 
-          title: route.params,
-          headerStyle: {
-            backgroundColor: "#3F0331",
-          },
-          statusBarColor: "#3F0331",
-          statusBarTranslucent: true,
-          headerTitleStyle: {
-            fontFamily: FONTS.MulishBold,
-            color: "#fff",
-          },
-          headerLeft: () => <Button />,
-        })}
-        component={Wallet}
-      />
-      <Stack.Screen name="Support" component={Support} />
-      <Stack.Screen name="EditProfile" component={EditProfile} />
-      <Stack.Screen name="About" component={About} />
-      <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="AddFriends" component={AddFriends} options={{}} />
+      <Stack.Screen name="AddFriends" component={AddFriends} />
       <Stack.Screen name="InviteFriends" component={InviteFriends} />
       <Stack.Screen name="ImportContacts" component={ImportContacts} />
-
-      {/* <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
   );
 };
 
-export default UserProfile;
+export default ContactNavigator;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

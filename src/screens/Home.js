@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 20,
     flex: 1,
-    backgroundColor: "#FCF8FA",
+    backgroundColor: "#FFF5FE",
   },
   semi: {
     position: "absolute",

@@ -32,11 +32,16 @@ import back from "./images/back.png";
 import Arrow from "./images/Arrow.png";
 import setting from "./images/setting.png";
 import camera from "./images/camera.png";
+import dots from "./images/dots.png";
+import contact from "./images/contact.png";
+import search from "./images/search.png";
 
 export default {
   Arrow,
   back,
+  contact,
   logo,
+  search,
   camera,
   info,
   edit,
@@ -68,4 +73,5 @@ export default {
   image07,
   image08,
   cake,
+  dots,
 };

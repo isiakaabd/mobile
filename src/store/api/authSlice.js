@@ -17,16 +17,16 @@ export const authSlice = api.injectEndpoints({
         method: "POST",
         body: JSON.stringify(body),
       }),
-      invalidatesTags: ["GenerateEndPoint"],
+      invalidatesTags: ["GenerateEndPoint", "User"],
     }),
     register: builder.mutation({
       query: (body) => ({
         url: "/register",
         method: "POST",
         body: JSON.stringify(body),
-        headers: (headers) => {
-          headers.append("Content-Type", "multipart/form-data");
-        },
+        // headers: (headers) => {
+        //   headers.append("Content-Type", "multipart/form-data");
+        // },
       }),
       invalidatesTags: ["GenerateEndPoint"],
       transformResponse: (response) => response.data,

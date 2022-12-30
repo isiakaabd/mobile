@@ -1,17 +1,16 @@
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { View, TextInput, Text, StyleSheet, Image } from "react-native";
 import { FONTS } from "../utils/fonts";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import images from "../assets";
 import { useState } from "react";
 import { useFormikContext } from "formik";
-const SearchInput = ({ properties, style, name, ...rest }) => {
+const SearchInput = ({ properties, style, name, containerStyle, ...rest }) => {
   const { handleChange, handleBlur, values } = useFormikContext();
   return (
-    <View style={styles.container}>
-      <FontAwesome5
-        name={"search"}
-        size={20}
-        color="#C1AFC7"
-        style={{ marginLeft: 30 }}
+    <View style={[styles.container, { ...containerStyle }]}>
+      <Image
+        source={images.search}
+        resizeMode="contain"
+        style={{ marginLeft: 20, height: 25 }}
       />
       <TextInput
         {...properties}
@@ -41,11 +40,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 50,
     flexWrap: "nowrap",
+    zIndex: 200,
   },
   input: {
     flex: 1,
     // height: 50,
-    paddingHorizontal: 13,
+    paddingHorizontal: 10,
     fontSize: 14,
     fontFamily: FONTS.Mulish,
   },

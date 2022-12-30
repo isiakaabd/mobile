@@ -5,7 +5,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "https://api.cheers.global/api",
 
   prepareHeaders: (headers, { getState }) => {
-    console.log(getState().reducer.bearerToken, "state");
     const token = getState().token;
     const bearerToken = getState().reducer.bearerToken;
     headers.append("Content-Type", "application/json");
@@ -21,9 +20,8 @@ const baseQuery = fetchBaseQuery({
 const baseQuerywithAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.originalStatus === 403) {
-    console.log(`sending refresh token`);
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
-    console.log(refreshResult);
+
     if (refreshResult?.data) {
       api.dispatch(getUserDetails(refreshResult));
       result = await baseQuery(args, api, extraOptions);
