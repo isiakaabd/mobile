@@ -6,6 +6,9 @@ import image04 from "./images/image04.png";
 import image05 from "./images/image05.png";
 import image06 from "./images/image06.png";
 import image07 from "./images/image07.png";
+import contacts from "./images/contacts.png";
+import follow from "./images/follow.png";
+import google from "./images/google.png";
 import image08 from "./images/image08.png";
 import image09 from "./images/image09.png";
 import cheers from "./images/cheers.png";
@@ -40,6 +43,9 @@ export default {
   Arrow,
   back,
   contact,
+  contacts,
+  follow,
+  google,
   logo,
   search,
   camera,

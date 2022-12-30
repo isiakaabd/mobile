@@ -10,6 +10,7 @@ import { AddFriends, InviteFriends, ImportContacts } from "./settings/index";
 import { FONTS } from "../utils/fonts";
 import images from "../assets";
 import Contacts from "./Contacts";
+import AddFriendsFromContact from "./AddFriendsFromContact";
 
 const Stack = createNativeStackNavigator();
 const ContactNavigator = ({ navigation }) => {
@@ -68,9 +69,10 @@ const ContactNavigator = ({ navigation }) => {
         options={{ headerShown: true, headerLeft: null }}
       />
 
-      <Stack.Screen name="AddFriends" component={AddFriends} />
-      <Stack.Screen name="InviteFriends" component={InviteFriends} />
-      <Stack.Screen name="ImportContacts" component={ImportContacts} />
+      <Stack.Screen name="Add Friends Manually" component={AddFriends} />
+      <Stack.Screen name="Invite Friends" component={InviteFriends} />
+      <Stack.Screen name="Import Contacts" component={ImportContacts} />
+      <Stack.Screen name="Add Friends" component={AddFriendsFromContact} />
     </Stack.Navigator>
   );
 };

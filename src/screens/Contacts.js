@@ -16,6 +16,7 @@ import images from "../assets";
 import { FONTS } from "../utils/fonts";
 import { useLazyGetcontactsQuery } from "../store/api/userSlice";
 import Modals from "../components/Modals";
+import Select from "../components/Select";
 
 const windowHeight = Dimensions.get("window").height;
 const Contacts = ({ navigation }) => {
@@ -48,16 +49,16 @@ const Contacts = ({ navigation }) => {
     {
       id: 1,
       title: "Add Friend",
-      link: "AddFriends",
+      link: "Add Friends Manually",
     },
     {
       id: 2,
       title: "Invite Friends",
-      link: "InviteFriends",
+      link: "Invite Friends",
     },
     {
       id: 3,
-      link: "ImportContacts",
+      link: "Import Contacts",
       title: "Import Contacts",
     },
   ];
@@ -109,6 +110,35 @@ const Contacts = ({ navigation }) => {
           </View>
         )}
       </View>
+      {/* <View
+        style={{
+          backgroundColor: "red",
+          position: "absolute",
+          flexDirection: "row",
+          width: 90,
+        }}
+      >
+        <Text>Sort by</Text>
+        <View>
+          <Formik
+            initialValues={{
+              sort: "",
+            }}
+          >
+            {({ isValid, isSubmitting, handleSubmit }) => (
+              <Select
+                name="Sort"
+                options={[
+                  {
+                    label: "Sort By",
+                    value: "sort",
+                  },
+                ]}
+              />
+            )}
+          </Formik>
+        </View>
+      </View> */}
       <Modals open={open} modalStyle={{ right: 0 }}>
         <FlatList
           data={arr}
