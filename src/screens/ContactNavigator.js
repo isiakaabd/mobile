@@ -6,7 +6,12 @@ import {
 } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { AddFriends, InviteFriends, ImportContacts } from "./settings/index";
+import {
+  AddFriends,
+  InviteFriends,
+  ImportContacts,
+  PhoneBook,
+} from "./settings/index";
 import { FONTS } from "../utils/fonts";
 import images from "../assets";
 import Contacts from "./Contacts";
@@ -73,6 +78,7 @@ const ContactNavigator = ({ navigation }) => {
       <Stack.Screen name="Invite Friends" component={InviteFriends} />
       <Stack.Screen name="Import Contacts" component={ImportContacts} />
       <Stack.Screen name="Add Friends" component={AddFriendsFromContact} />
+      <Stack.Screen name="Phone Book" component={PhoneBook} />
     </Stack.Navigator>
   );
 };

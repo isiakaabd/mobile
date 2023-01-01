@@ -42,10 +42,9 @@ const ImportContacts = ({ navigation }) => {
           justifyContent: "space-between",
           flexWrap: "wrap",
           paddingHorizontal: 20,
-          //   backgroundColor: "red",
         }}
       >
-        {arr.slice(0, 3).map((item, index) => {
+        {arr.map((item, index) => {
           return (
             <TouchableOpacity
               style={{

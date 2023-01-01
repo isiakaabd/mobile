@@ -26,10 +26,21 @@ export const userSlice = api.injectEndpoints({
       invalidatesTags: ["GenerateEndPoint"],
       transformResponse: (response) => response.data,
     }),
+
+    importContact: builder.mutation({
+      query: (body) => ({
+        url: "/contact/import",
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+      invalidatesTags: ["GenerateEndPoint"],
+      // transformResponse: (response) => response.data,
+    }),
   }),
 });
 export const {
   useProfileQuery,
   useLazyGetcontactsQuery,
   useAddcontactsMutation,
+  useImportContactMutation,
 } = userSlice;
