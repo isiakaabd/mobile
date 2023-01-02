@@ -26,6 +26,7 @@ import line2 from "./images/line2.png";
 import line3 from "./images/line3.png";
 import send from "./images/send.png";
 import wallet from "./images/wallet.png";
+import wallet2 from "./images/wallet2.png";
 import info from "./images/info.png";
 import edit from "./images/edit.png";
 import edit2 from "./images/edit2.png";
@@ -48,6 +49,7 @@ export default {
   google,
   logo,
   search,
+  wallet2,
   camera,
   info,
   edit,

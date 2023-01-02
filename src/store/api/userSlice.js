@@ -36,6 +36,24 @@ export const userSlice = api.injectEndpoints({
       invalidatesTags: ["GenerateEndPoint"],
       // transformResponse: (response) => response.data,
     }),
+    searchContact: builder.query({
+      query: (search) => ({
+        url: `/contact/search?search=${search}`,
+        method: "GET",
+      }),
+      invalidatesTags: ["GenerateEndPoint"],
+
+      transformResponse: (response) => response.data,
+    }),
+    walletDetails: builder.query({
+      query: () => ({
+        url: `/profile/wallets/detail`,
+        method: "GET",
+      }),
+      invalidatesTags: ["GenerateEndPoint"],
+
+      // transformResponse: (response) => response.data,
+    }),
   }),
 });
 export const {
@@ -43,4 +61,6 @@ export const {
   useLazyGetcontactsQuery,
   useAddcontactsMutation,
   useImportContactMutation,
+  useLazySearchContactQuery,
+  useWalletDetailsQuery,
 } = userSlice;

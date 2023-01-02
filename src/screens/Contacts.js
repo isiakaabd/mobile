@@ -10,16 +10,20 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Loader, SearchInput } from "../components";
-import { Formik } from "formik";
+import { Formik, useFormikContext } from "formik";
 import Contact from "../components/Contact";
 import images from "../assets";
 import { FONTS } from "../utils/fonts";
-import { useLazyGetcontactsQuery } from "../store/api/userSlice";
+import {
+  useLazyGetcontactsQuery,
+  useLazySearchContactQuery,
+} from "../store/api/userSlice";
 import Modals from "../components/Modals";
 import Select from "../components/Select";
+import useAlert from "../components/Alert";
 
 const windowHeight = Dimensions.get("window").height;
-const Contacts = ({ navigation }) => {
+const Contacts = ({ navigation, route }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -35,15 +39,22 @@ const Contacts = ({ navigation }) => {
       ),
     });
   }, [navigation]);
-  // console.log(props);
+
+  const [state, setState] = useState([]);
   const [getContact, { data, isLoading }] = useLazyGetcontactsQuery();
-  const [state, setState] = useState({
+  const [search, { isLoading: loading }] = useLazySearchContactQuery();
+  const { showAlert } = useAlert();
+  const [pages, setPages] = useState({
     page: 1,
     per_page: 20,
   });
   useEffect(() => {
-    getContact(state);
-  }, []);
+    const fetch = async () => {
+      const { data } = await getContact(pages);
+      setState(data?.data);
+    };
+    fetch();
+  }, [pages]);
 
   const arr = [
     {
@@ -62,24 +73,46 @@ const Contacts = ({ navigation }) => {
       title: "Import Contacts",
     },
   ];
+  const searchContact = async (values) => {
+    const { data, error } = await search(values.search);
+    setState(data?.data);
+    if (error) showAlert(error?.message || "Something went wrong...");
+  };
+  // useEffect(() => {
+  //   const handler = (e) => {
+  //     if (e.keyCode === 13) {
+  //       // check if the user is on the invoice page or not
+  //       if (route.params.name === "Contacts") {
+  //         e.preventDefault();
+  //         searchContact(values);
+  //       }
+  //     }
+  //   };
+  //   // document.addEventListener("keydown", handler);
+  //   // return () => {
+  //   //   document.removeEventListener("keydown", handler);
+  //   // };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   if (isLoading) return <Loader />;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF5FE" }}>
-      {/* style={{ backgroundColor: "#FFF5FE" }} */}
       <View>
         <View style={styles.container}>
-          <Formik initialValues={{ search: "" }}>
+          <Formik initialValues={{ search: "" }} onSubmit={searchContact}>
             <SearchInput
               name="search"
               containerStyle={{ borderRadius: 10 }}
+              onClick={searchContact}
               properties={{ placeholder: "Search contact" }}
+              loading={loading}
             />
           </Formik>
         </View>
         {/* data.data */}
-        {data?.data?.length > 0 ? (
+        {state?.length > 0 ? (
           <FlatList
-            data={data?.data}
+            data={state}
             contentContainerStyle={{
               zIndex: -1,
               paddingBottom: 120,

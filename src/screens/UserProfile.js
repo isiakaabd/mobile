@@ -13,6 +13,10 @@ import {
 import { FONTS } from "../utils/fonts";
 import images from "../assets";
 import { Support, EditProfile, About, Account } from "./options";
+import Password from "./account/Password";
+import DeliveryAddress from "./account/DeliveryAddress";
+import BankDetails from "./account/BankDetails";
+import Contributions from "./account/Contributions";
 
 const Stack = createNativeStackNavigator();
 const UserProfile = ({ navigation }) => {
@@ -84,6 +88,10 @@ const UserProfile = ({ navigation }) => {
       <Stack.Screen name="AddFriends" component={AddFriends} />
       <Stack.Screen name="InviteFriends" component={InviteFriends} />
       <Stack.Screen name="ImportContacts" component={ImportContacts} />
+      <Stack.Screen name="Password" component={Password} />
+      <Stack.Screen name="Delivery Address" component={DeliveryAddress} />
+      <Stack.Screen name="Bank Details" component={BankDetails} />
+      <Stack.Screen name="Contributions" component={Contributions} />
 
       {/* <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>

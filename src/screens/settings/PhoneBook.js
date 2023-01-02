@@ -132,8 +132,8 @@ const PhoneBook = () => {
   const { showAlert } = useAlert();
   const [contacts, setContacts] = useState([]);
   const [contactsList, setContactsList] = useState([]);
-  const [importContact, dt] = useImportContactMutation();
-  console.log(dt);
+  const [importContact, { isLoading }] = useImportContactMutation();
+
   useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
@@ -155,7 +155,7 @@ const PhoneBook = () => {
       }
     })();
   }, []);
-  if (dt.isLoading) return <Loader />;
+  if (isLoading) return <Loader />;
   const handleSubmit = async () => {
     let transformedContacts = contacts.map((contact) => {
       const { name, emails, rawDates, phoneNumbers } = contact;

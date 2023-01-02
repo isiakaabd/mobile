@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useFormikContext } from "formik";
+import { FONTS } from "../utils/fonts";
 
 const ImagePickers = () => {
   const [image, setImage] = useState(null);
@@ -61,7 +62,15 @@ const ImagePickers = () => {
         />
       ) : (
         <TouchableOpacity onPress={pickImage}>
-          <Text>Add a picture</Text>
+          <Text
+            style={{
+              fontFamily: FONTS.MulishBold,
+              fontSize: 13,
+              color: "#fff",
+            }}
+          >
+            Add a picture
+          </Text>
         </TouchableOpacity>
       )}
     </View>

@@ -24,7 +24,7 @@ const ImportContacts = ({ navigation }) => {
     {
       title: "Add Friends",
       image: images.follow,
-      link: "Add Friends",
+      link: "Add Friends Manually",
     },
   ];
   return (

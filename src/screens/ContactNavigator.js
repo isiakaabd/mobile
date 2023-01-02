@@ -16,6 +16,8 @@ import { FONTS } from "../utils/fonts";
 import images from "../assets";
 import Contacts from "./Contacts";
 import AddFriendsFromContact from "./AddFriendsFromContact";
+import Google from "./Google";
+import Password from "./account/Password";
 
 const Stack = createNativeStackNavigator();
 const ContactNavigator = ({ navigation }) => {
@@ -77,7 +79,12 @@ const ContactNavigator = ({ navigation }) => {
       <Stack.Screen name="Add Friends Manually" component={AddFriends} />
       <Stack.Screen name="Invite Friends" component={InviteFriends} />
       <Stack.Screen name="Import Contacts" component={ImportContacts} />
-      <Stack.Screen name="Add Friends" component={AddFriendsFromContact} />
+      <Stack.Screen name="Google" component={Google} />
+      {/* <Stack.Screen name="Password" component={Password} /> */}
+      {/* <Stack.Screen
+        name="Add Friends Manually"
+        component={AddFriendsFromContact}
+      /> */}
       <Stack.Screen name="Phone Book" component={PhoneBook} />
     </Stack.Navigator>
   );
