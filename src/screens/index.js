@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 import ChangePassword from "./ChangePassword";
 import ConfirmEmail from "./ConfirmEmail";
-import Contact from "./Contact";
+import Contacts from "./Contacts";
 import ForgotPassword from "./ForgotPassword";
 import Home from "./Home";
 import LandingPage from "./LandingPage";
@@ -17,7 +17,7 @@ import Verify from "./Verify";
 
 export {
   Login,
-  Contact,
+  Contacts,
   Notification,
   Register,
   RouteNavigator,

@@ -1,10 +1,11 @@
 import { StyleSheet, ActivityIndicator, Image, View } from "react-native";
 import { SHADOWS } from "~/utils/fonts";
 import images from "../assets";
+import { BlurView } from "expo-blur";
 
 const Loader = () => {
   return (
-    <View style={[styles.loader, { zIndex: 1000 }]}>
+    <View style={[styles.loader]}>
       <View style={[styles.img]}>
         <Image
           source={images.logo2}
@@ -17,6 +18,7 @@ const Loader = () => {
           size="large"
           color="#D20C83"
         />
+        <BlurView style={{ flex: 1 }} />
       </View>
     </View>
   );

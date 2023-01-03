@@ -10,6 +10,7 @@ const Button = ({
   handlePress,
   textColor,
   disabled,
+  color,
   ...rest
 }) => {
   return (
@@ -19,9 +20,12 @@ const Button = ({
       disabled={disabled}
       style={[styles.container, { backgroundColor }]}
     >
-      <Text style={[styles.text]}>{text}</Text>
+      <Text style={[styles.text, { color: color }]}>{text}</Text>
     </TouchableOpacity>
   );
+};
+Button.defaultProps = {
+  color: "#fff",
 };
 const styles = StyleSheet.create({
   container: {

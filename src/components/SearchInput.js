@@ -1,32 +1,63 @@
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { FONTS } from "../utils/fonts";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import images from "../assets";
 import { useState } from "react";
 import { useFormikContext } from "formik";
-const SearchInput = ({ properties, style, name, ...rest }) => {
-  const { handleChange, handleBlur, values } = useFormikContext();
+const SearchInput = ({
+  properties,
+  onClick,
+  style,
+  name,
+  containerStyle,
+  loading,
+  ...rest
+}) => {
+  const { handleChange, handleBlur, handleSubmit, values } = useFormikContext();
+
   return (
-    <View style={styles.container}>
-      <FontAwesome5
-        name={"search"}
-        size={20}
-        color="#C1AFC7"
-        style={{ marginLeft: 30 }}
-      />
-      <TextInput
-        {...properties}
-        {...rest}
-        onChangeText={handleChange(name)}
-        onBlur={handleBlur(name)}
-        // {...field}
-        value={values[name]}
-        placeholderTextColor="#C1AFC7"
-        nativeID={name}
-        cursorColor="#822E6F"
-        autoComplete="off"
-        style={[styles.input, { ...style }]}
-      />
-    </View>
+    <>
+      <View style={[styles.container, { ...containerStyle }]}>
+        <TouchableWithoutFeedback onPress={handleSubmit}>
+          <Image
+            source={images.search}
+            resizeMode="contain"
+            style={{ marginLeft: 20, height: 25 }}
+          />
+        </TouchableWithoutFeedback>
+        <TextInput
+          {...properties}
+          {...rest}
+          onChangeText={handleChange(name)}
+          onBlur={handleBlur(name)}
+          // {...field}
+          value={values[name]}
+          placeholderTextColor="#C1AFC7"
+          nativeID={name}
+          cursorColor="#822E6F"
+          autoComplete="off"
+          style={[styles.input, { ...style }]}
+        />
+      </View>
+      {loading && (
+        <Text
+          style={{
+            color: "#000",
+            textAlign: "right",
+            marginTop: 3,
+            fontFamily: FONTS.MulishBold,
+          }}
+        >
+          Loading..
+        </Text>
+      )}
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -41,11 +72,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 50,
     flexWrap: "nowrap",
+    zIndex: 200,
   },
   input: {
     flex: 1,
     // height: 50,
-    paddingHorizontal: 13,
+    paddingHorizontal: 10,
     fontSize: 14,
     fontFamily: FONTS.Mulish,
   },

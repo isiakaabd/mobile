@@ -6,6 +6,9 @@ import image04 from "./images/image04.png";
 import image05 from "./images/image05.png";
 import image06 from "./images/image06.png";
 import image07 from "./images/image07.png";
+import contacts from "./images/contacts.png";
+import follow from "./images/follow.png";
+import google from "./images/google.png";
 import image08 from "./images/image08.png";
 import image09 from "./images/image09.png";
 import cheers from "./images/cheers.png";
@@ -23,6 +26,7 @@ import line2 from "./images/line2.png";
 import line3 from "./images/line3.png";
 import send from "./images/send.png";
 import wallet from "./images/wallet.png";
+import wallet2 from "./images/wallet2.png";
 import info from "./images/info.png";
 import edit from "./images/edit.png";
 import edit2 from "./images/edit2.png";
@@ -32,11 +36,20 @@ import back from "./images/back.png";
 import Arrow from "./images/Arrow.png";
 import setting from "./images/setting.png";
 import camera from "./images/camera.png";
+import dots from "./images/dots.png";
+import contact from "./images/contact.png";
+import search from "./images/search.png";
 
 export default {
   Arrow,
   back,
+  contact,
+  contacts,
+  follow,
+  google,
   logo,
+  search,
+  wallet2,
   camera,
   info,
   edit,
@@ -68,4 +81,5 @@ export default {
   image07,
   image08,
   cake,
+  dots,
 };
